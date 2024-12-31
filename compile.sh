@@ -12,7 +12,11 @@ rmdir KernelSU
 curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs-4.9/kernel/setup.sh" | bash -s next-susfs-4.9
 
 git clone https://gitlab.com/simonpunk/susfs4ksu.git --depth 1 --branch kernel-4.9
-cp -r susfs4ksu/kernel_patches/* .
+cd susfs4ksu
+cp ./kernel_patches/50_add_susfs_in_kernel-4.9.patch ../
+cp ./kernel_patches/fs/susfs.c ../fs/
+cp ./kernel_patches/include/linux/susfs.h ../include/linux/
+cd ..
 patch -p1 < 50_add_susfs_in_kernel-4.9.patch
 
 # Cleanup
